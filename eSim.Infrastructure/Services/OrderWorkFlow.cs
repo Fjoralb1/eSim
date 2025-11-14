@@ -25,7 +25,7 @@ public sealed class OrderWorkflow : IOrderWorkflow
     {
         int distributorId = _db.Distributors.SingleOrDefault(s => s.IsActive)!.DistributorId;
 
-        if (request.locationCode.Equals("AL", StringComparison.OrdinalIgnoreCase))
+        if (request.locationCode.Equals("AL", StringComparison.OrdinalIgnoreCase) && _distributor._manetService._isActiveDistributor)
             distributorId = (int)DistributorEnum.Manet;
 
         var order = new Order

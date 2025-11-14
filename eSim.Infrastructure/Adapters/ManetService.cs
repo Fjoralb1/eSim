@@ -17,6 +17,9 @@ public class ManetService
     public AppDbContext _dbContext { get; }
     public ILogger<ManetService> _logger { get; }
 
+    // Manet general config
+    public readonly bool _isActiveDistributor;
+
     // Authentication
     private readonly string _accessCode;
     private readonly string _partnerId;
@@ -37,6 +40,9 @@ public class ManetService
         _http = http;
         _dbContext = dbContext;
         _logger = logger;
+
+        // Manet general config
+        _isActiveDistributor = bool.Parse(cfg["Manet:IsActiveDistributor"]!);
 
         // Authentication
         _accessCode = cfg["Manet:AccessCode"]!;

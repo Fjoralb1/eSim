@@ -16,12 +16,12 @@ namespace eSim.Infrastructure.Services
     {
         private AppDbContext _dbContext { get; }
         private EsimAccessService _eSimAccessService { get; }
-        private ManetService _manetService { get; }
-        public IEmailService _emailService { get; }
-        public UserManager<ApplicationUser> _users { get; }
-        public IPayPalClient _payPalClient { get; }
-        public IInvoiceService _invoiceService { get; }
-        public ILogger<DistributorManager> _logger { get; }
+        public ManetService _manetService { get; }
+        private IEmailService _emailService { get; }
+        private UserManager<ApplicationUser> _users { get; }
+        private IPayPalClient _payPalClient { get; }
+        private IInvoiceService _invoiceService { get; }
+        private ILogger<DistributorManager> _logger { get; }
 
         public DistributorManager(
             AppDbContext context,
@@ -67,7 +67,7 @@ namespace eSim.Infrastructure.Services
             {
                 int distributorId = _dbContext.Distributors.SingleOrDefault(s => s.IsActive)!.DistributorId;
 
-                if (locationCode.Equals("AL", StringComparison.OrdinalIgnoreCase))
+                if (locationCode.Equals("AL", StringComparison.OrdinalIgnoreCase) && _manetService._isActiveDistributor)
                     distributorId = (int)DistributorEnum.Manet;
 
                 var filteredPackages = new PackageListResult();
