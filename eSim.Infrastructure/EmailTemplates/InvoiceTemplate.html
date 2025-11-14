@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #0e2d3d;
+        }
+
+        .sheet {
+            width: 190mm; /* A4 width minus margins */
+            margin: 0 auto;
+        }
+
+        .frame {
+            width: 100%;
+            height: 277mm; /* A4 height minus margins */
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .body-row {
+            height: 100%;
+            vertical-align: top;
+        }
+
+        .footer-row {
+            height: 16mm;
+            vertical-align: bottom;
+        }
+
+        .h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .p {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .spacer12 {
+            height: 12px;
+        }
+
+        .spacer18 {
+            height: 18px;
+        }
+
+        .spacer24 {
+            height: 24px;
+        }
+
+        .spacer32 {
+            height: 32px;
+        }
+
+        .sep {
+            border: 0;
+            border-top: 1px solid #2a4a5b;
+            margin: 18px 0;
+        }
+
+        table.list {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+        }
+
+            table.list th {
+                font-weight: 600;
+                font-size: 14px;
+                text-align: left;
+                padding: 8px 6px;
+                border-bottom: 1px solid #dcdcdc;
+            }
+
+            table.list td {
+                font-size: 14px;
+                padding: 8px 6px;
+                border-bottom: 1px solid #e9e9e9;
+            }
+
+        table.summary {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+        }
+
+            table.summary th, table.summary td {
+                border: 1px solid #dcdcdc;
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            table.summary th {
+                background: #f3f6f9;
+            }
+
+        .footer {
+            font-size: 12px;
+            color: #4a5b68;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="sheet">
+        <table class="frame">
+            <tr class="body-row">
+                <td>
+
+                    <!-- HEADER -->
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <img src="{{LogoBase64}}" style="height:24mm;" />
+                            </td>
+                            <td align="right" class="h1">RECEIPT</td>
+                        </tr>
+                    </table>
+
+                    <div class="spacer24"></div>
+
+                    <!-- COMPANY & CUSTOMER -->
+                    <div class="p">
+                        {{CompanyName}}<br>
+                        16 SLATE STREET<br>
+                        S2 3HA<br>
+                        SHEFFIELD
+                    </div>
+
+                    <div class="spacer18"></div>
+
+                    <div class="p">
+                        <b>{{CustomerName}}</b><br>
+                        {{CustomerEmail}}
+                    </div>
+
+                    <div class="spacer24"></div>
+
+                    <!-- SEPARATOR #1 -->
+                    <hr class="sep" />
+
+                    <!-- ORDER META -->
+                    <table class="list">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Total Paid</th>
+                            <th>Date Paid</th>
+                            <th>Payment Method</th>
+                        </tr>
+                        <tr>
+                            <td>{{OrderNumber}}</td>
+                            <td>€{{OrderTotal}}</td>
+                            <td>{{OrderDate}}</td>
+                            <td>PayPal</td>
+                        </tr>
+                    </table>
+
+                    <div class="spacer24"></div>
+
+                    <!-- SEPARATOR #2 -->
+                    <hr class="sep" />
+
+                    <!-- SUMMARY TABLE -->
+                    <div class="h2">Summary</div>
+                    <table class="summary">
+                        <tr>
+                            <th style="width:18mm;">Qty</th>
+                            <th>Product</th>
+                            <th style="width:28mm;">Unit Price</th>
+                            <th style="width:28mm;">Amount</th>
+                        </tr>
+                        {{ItemsRows}}
+                    </table>
+
+                    <div class="spacer24"></div>
+
+                    <!-- SEPARATOR #3 -->
+                    <hr class="sep" />
+
+                    <div style="text-align:right; font-size:16px; font-weight:700;">
+                        Total Price: €{{OrderTotal}}
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr class="footer-row">
+                <td class="footer">
+                    Need help? Contact us at {{SupportEmail}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
