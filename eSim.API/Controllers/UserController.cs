@@ -31,7 +31,6 @@ namespace eSim.API.Controllers
 
                 var userList = users.Select(u => new
                 {
-                    u.Id,
                     u.Email,
                     u.CountryOfResidence,
                     u.FullName
