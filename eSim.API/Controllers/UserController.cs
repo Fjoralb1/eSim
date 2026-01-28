@@ -35,6 +35,7 @@ namespace eSim.API.Controllers
                     u.CountryOfResidence,
                     u.FullName
                 }).ToList();
+
                 return Ok(userList);
             }
             catch (Exception ex)
